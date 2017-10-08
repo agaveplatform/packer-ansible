@@ -1,0 +1,3 @@
+---
+# file: ansible/requirements.yml
+- src: zaxos.docker-ce-ansible-role

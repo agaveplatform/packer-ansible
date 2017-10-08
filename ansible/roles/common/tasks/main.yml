@@ -1,0 +1,34 @@
+# file common/tasks/main.yml
+# This role applies to any Agave server. Creates base accounts, sets up ssh keys, etc.
+---
+
+- name: Clean up host removing service user temp data, running containers, etc.
+  include_tasks: clean_host.yml
+  when: clean_host
+
+- name: Install base OS software environment (RedHat)
+  include_tasks: software-RedHat.yml
+  when: ansible_os_family == 'RedHat'
+
+- name: Install base OS software environment (Debian)
+  include_tasks: software-Debian.yml
+  when: ansible_os_family == 'Debian'
+
+- name: Create system user accounts and restrict access
+  include_tasks: users.yml
+
+- name: ensure services enabled (Debian)
+  service: name=ntp state=started enabled=yes
+  become: yes
+  become_user: root
+  become_method: sudo
+  tags: ['ntp']
+  when: ansible_os_family == 'Debian'
+
+- name: ensure services enabled (RedHat)
+  service: name=ntpd state=started enabled=yes
+  become: yes
+  become_user: root
+  become_method: sudo
+  tags: ['ntp']
+  when: ansible_os_family == 'RedHat'

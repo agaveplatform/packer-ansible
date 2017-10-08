@@ -1,0 +1,16 @@
+---
+- name: restart ntp service (Debian)
+  service: name=ntp state=restarted
+  become: yes
+  become_user: root
+  become_method: sudo
+  when: ansible_os_family == 'Debian'
+  tags: ['ntp']
+
+- name: restart ntp service (RedHat)
+  service: name=ntpd state=restarted
+  become: yes
+  become_user: root
+  become_method: sudo
+  when: ansible_os_family == 'RedHat'
+  tags: ['ntpd']

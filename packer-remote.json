@@ -1,0 +1,36 @@
+{
+  "variables": {
+    "docker_version": "",
+    "openstack_image_id": "814f5c06-4608-44a0-9e89-dad083d59e7b",
+    "openstack_flavor_id": "2"
+  },
+  "builders": [
+    {
+      "type": "openstack",
+      "ssh_username": "root",
+      "image_name": "agave_ubuntu1604_docker{{docker_version}}",
+      "source_image": "{{os_image_id}}",
+      "flavor": "2"
+    }
+  ],
+  "provisioners": [
+    {
+        "type": "shell",
+        "script": "install-ansible.sh",
+        "pause_before": "10s",
+        "execute_command": "chmod +x {{ .Path }}; {{ .Vars }} sudo -E {{ .Path }}"
+    },
+    {
+        "type": "file",
+        "source": "{{ user `src_package` }}",
+        "destination": "/tmp/app.tar.gz"
+    },
+    {
+        "type": "ansible-local",
+        "playbook_file": "configure-ami.yml",
+        "extra_arguments": [
+            "--extra-vars 'src_package=/tmp/app.tar.gz'"
+        ]
+    }
+  ]
+}

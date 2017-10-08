@@ -1,0 +1,11 @@
+---
+- hosts: localhost
+  connection: local
+
+  # Run all commands via sudo
+  become: true
+
+  roles:
+    - common
+    - zaxos.docker-ce-ansible-role
+    - docker_aliases

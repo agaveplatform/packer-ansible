@@ -1,0 +1,49 @@
+{
+  "variables": {
+    "docker_version": "17.09.0~ce-0~ubuntu",
+    "openstack_image_id": "87e08a17-eae2-4ce4-9051-c561d9a54bde",
+    "openstack_flavor_id": "2",
+    "openstack_network_id": "c30ca0dd-a1b7-4736-b5c1-68741196b03a"
+  },
+  "builders": [
+    {
+      "type": "openstack",
+      "ssh_username": "root",
+      "image_name": "agave_ubuntu1604_docker{{user `docker_version`}}",
+      "source_image": "{{user `openstack_image_id`}}",
+      "flavor": "{{user `openstack_flavor_id`}}",
+      "use_floating_ip": true,
+      "floating_ip_pool": "public",
+      "security_groups": [
+        "packer"
+      ],
+      "networks": [
+        "{{user `openstack_network_id`}}"
+      ],
+      "ssh_username": "root"
+    }
+  ],
+  "provisioners": [
+    {
+      "type": "shell",
+      "inline": [
+        "pip install --upgrade pip",
+        "pip install ansible==2.4.0"
+      ]
+    },
+    {
+      "type": "ansible-local",
+      "playbook_file": "/data/ansible/playbook.yml",
+      "playbook_dir": "/data/ansible",
+      "galaxy_file": "/data/ansible/requirements.yml",
+      "only": ["openstack"]
+    }
+  ],
+  "post-processors": [
+    {
+      "type": "manifest",
+      "output": "manifest.json",
+      "strip_path": true
+    }
+  ]
+}
