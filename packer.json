@@ -1,7 +1,7 @@
 {
   "variables": {
     "docker_version": "17.09.0~ce-0~ubuntu",
-    "openstack_image_id": "87e08a17-eae2-4ce4-9051-c561d9a54bde",
+    "openstack_image_id": "32bf80f9-7368-4b05-97b5-2e8fff0f6e80",
     "openstack_flavor_id": "2",
     "openstack_network_id": "c30ca0dd-a1b7-4736-b5c1-68741196b03a"
   },

@@ -31,6 +31,9 @@
     - vim
     - jq
     - iftop
+  become: yes
+  become_user: root
+  become_method: sudo
 
 - name: Install commonly needed software (RHEL7-family)
   package:
@@ -40,3 +43,6 @@
     # other "standard" utilities
     - moreutils
   when: 'is_rhel7_compatible'
+  become: yes
+  become_user: root
+  become_method: sudo
