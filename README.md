@@ -1,4 +1,6 @@
 # Agave VM Creator  
+
+## Overview  
 This repository contains a [Packer](https://packer.io) template and [Ansible](https://ansible.io) playbook to build the default base VM image used by the Agave Platform to host its docker services. By default, the playbook will build an Ubuntu 16.4 image and publish it to the Indiana University Jetstream (OpenStack) cluster.
 
 ## Requirements

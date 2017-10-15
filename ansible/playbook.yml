@@ -9,3 +9,4 @@
     - common
     - zaxos.docker-ce-ansible-role
     - docker_aliases
+    - docker_compose

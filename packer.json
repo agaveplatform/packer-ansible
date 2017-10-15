@@ -1,14 +1,14 @@
 {
   "variables": {
-    "docker_version": "17.09.0~ce-0~ubuntu",
-    "openstack_image_id": "32bf80f9-7368-4b05-97b5-2e8fff0f6e80",
+    "openstack_image_id": "3e2cfdd5-f726-4535-b035-26f72917aa96",
     "openstack_flavor_id": "2",
-    "openstack_network_id": "c30ca0dd-a1b7-4736-b5c1-68741196b03a"
+    "openstack_network_id": "c30ca0dd-a1b7-4736-b5c1-68741196b03a",
+    "docker_version": "17.09-ce"
   },
   "builders": [
     {
       "type": "openstack",
-      "ssh_username": "root",
+      "ssh_username": "ubuntu",
       "image_name": "agave_ubuntu1604_docker{{user `docker_version`}}",
       "source_image": "{{user `openstack_image_id`}}",
       "flavor": "{{user `openstack_flavor_id`}}",
@@ -20,15 +20,49 @@
       "networks": [
         "{{user `openstack_network_id`}}"
       ],
-      "ssh_username": "root"
+      "metadata": {
+        "org_agaveplatform_datacenter": "iu-jetstream",
+        "org_agaveplatform_environment": "training",
+        "org_agaveplatform_runtime": "docker",
+        "org_agaveplatform_builder_type": "packer",
+        "org_agaveplatform_builder_repository": "https://github.com/agaveplatform/packer-ansible",
+
+        "org_agaveplatform_storage_type": "disk",
+        "org_agaveplatform_storage_mount": null,
+        "org_agaveplatform_storage_server": false,
+
+        "org_agaveplatform_system_os": "Ubuntu 16.04.3 LTE",
+        "org_agaveplatform_system_logging": "syslog",
+        "org_agaveplatform_system_login": "agaveops",
+        "org_agaveplatform_system_software_docker_swarm_enabled": false,
+        "org_agaveplatform_system_software_docker_swarm_master": false,
+        "org_agaveplatform_system_software_java": null,
+        "org_agaveplatform_system_software_python": "2.7.12",
+        "org_agaveplatform_system_software_php": null,
+        "org_agaveplatform_system_software_node": null,
+        "org_agaveplatform_system_software_ruby": null,
+        "org_agaveplatform_system_software_perl": "5.22.1",
+        "org_agaveplatform_system_software_ruby": null,
+        "org_agaveplatform_system_software_golang": null,
+
+        "org_agaveplatform_system_software_docker": "{{user `docker_version`}}",
+        "org_agaveplatform_system_software_docker_plugins_volume": "local",
+        "org_agaveplatform_system_software_docker_plugins_network": "bridge,host,macvlan,null,overlay",
+        "org_agaveplatform_system_software_docker_plugins_log": "awslogs,fluentd,gcplogs,gelf,journald,json-file,logentries,splunk,syslog"
+      },
+      "user_data_file": "/data/user-data.yaml"
     }
   ],
   "provisioners": [
     {
       "type": "shell",
       "inline": [
-        "pip install --upgrade pip",
-        "pip install ansible==2.4.0"
+        "sleep 90",
+        "echo $(ps aux | grep 'apt-get' | grep -v 'grep apt-get' | awk '{print $2}') || true",
+        "while [ -n \"$(ps aux | grep 'apt-get' | grep -v 'grep apt-get' | awk '{print $2}')\" ]; do date; echo $(ps aux | grep 'apt-get' | grep -v 'grep apt-get'); sleep 10; done",
+        "sudo apt-get install -y python-pip",
+        "sudo pip install --upgrade pip",
+        "sudo pip install ansible==2.4.0"
       ]
     },
     {
@@ -42,7 +76,7 @@
   "post-processors": [
     {
       "type": "manifest",
-      "output": "manifest.json",
+      "output": "/data/manifest.json",
       "strip_path": true
     }
   ]

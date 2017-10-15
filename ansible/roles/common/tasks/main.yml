@@ -14,8 +14,8 @@
   include_tasks: software-Debian.yml
   when: ansible_os_family == 'Debian'
 
-- name: Create system user accounts and restrict access
-  include_tasks: users.yml
+# - name: Create system user accounts and restrict access
+#   include_tasks: users.yml
 
 - name: ensure services enabled (Debian)
   service: name=ntp state=started enabled=yes

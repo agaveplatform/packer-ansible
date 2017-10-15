@@ -1,0 +1,3 @@
+# file: docker_plugins/defaults/main.yml
+---
+skip_docker_compose: false

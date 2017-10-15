@@ -1,0 +1,4 @@
+# file: docker_plugins/defaults/main.yml
+---
+skip_volume_plugin_netshare: true
+skip_volume_plugin_sshfs: false

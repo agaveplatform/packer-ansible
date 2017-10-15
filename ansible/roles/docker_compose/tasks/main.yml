@@ -1,0 +1,38 @@
+# file: docker_compose/tasks/main.yml
+# This is the primary task for the docker_compose role. It installs the
+# docker compose via pip, cleaning up any older conflicting version of
+# the Python docker libary. This task can be skipped by setting the
+# skip_docker_compose variable to true.
+---
+
+- name: Clean up docker build
+  shell: "pip uninstall -y docker-py"
+  become: yes
+  become_user: root
+  become_method: sudo
+  when: not skip_docker_compose
+  ignore_errors: True
+  tags:
+    - docker
+    - compose
+
+- name: Clean up docker build
+  shell: "pip uninstall -y docker"
+  become: yes
+  become_user: root
+  become_method: sudo
+  when: not skip_docker_compose
+  ignore_errors: True
+  tags:
+    - docker
+    - compose
+
+- name: Install docker-compose
+  shell: "pip install docker-compose"
+  become: yes
+  become_user: root
+  become_method: sudo
+  when: not skip_docker_compose
+  tags:
+    - docker
+    - compose

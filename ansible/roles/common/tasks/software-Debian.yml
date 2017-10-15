@@ -50,6 +50,24 @@
     - vim
     - jq
     - iftop
+    - ntp
+    - apt-transport-https
+    - ca-certificates
+    - nfs-common
+  become: yes
+  become_user: root
+  become_method: sudo
+  ignore_errors: True
+
+- name: uninstall pyopenssl after apt https install
+  shell: pip uninstall -y pyopenssl
+  become: yes
+  become_user: root
+  become_method: sudo
+  ignore_errors: True
+
+- name: uninstall pyopenssl after apt https install
+  shell: pip install pyopenssl
   become: yes
   become_user: root
   become_method: sudo

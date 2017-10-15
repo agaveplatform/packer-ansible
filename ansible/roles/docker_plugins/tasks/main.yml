@@ -1,0 +1,39 @@
+# file: docker_plugins/tasks/main.yml
+# This is the primary task for the docker_plugins role. It installs the
+# netshare and sshfs plugins. Any of these tasks can be
+# skipped by setting the respective skip_volume_plugin_* variable to true.
+---
+
+- name: Install sshfs Docker volume plugin
+  shell: "docker plugin install -v --grant-all-permissions vieux/sshfs"
+  become: yes
+  become_user: root
+  become_method: sudo
+  when: not skip_volume_plugin_sshfs
+  tags:
+    - docker
+    - volumes
+
+- name: Fetch netshare Docker volume plugin
+  get_url:
+    url: https://github.com/ContainX/docker-volume-netshare/releases/download/v0.32/docker-volume-netshare_0.32_amd64.deb
+    dest: /tmp/docker-volume-netshare_0.32_amd64.deb
+    mode: 0744
+    force: yes
+  become: yes
+  become_user: root
+  become_method: sudo
+  when: not skip_volume_plugin_netshare
+  tags:
+    - completion
+    - volumes
+
+- name: Install netshare Docker volume plugin
+  shell: "dpkg -i /tmp/docker-volume-netshare_0.32_amd64.deb"
+  become: yes
+  become_user: root
+  become_method: sudo
+  when: not skip_volume_plugin_netshare
+  tags:
+    - completion
+    - volumes

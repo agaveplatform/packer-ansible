@@ -14,7 +14,7 @@
 
 - name: Add docker group for access to the docker socket
   group:
-    name: agave
+    name: docker
     state: present
   become: yes
   become_user: root
