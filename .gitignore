@@ -1,3 +1,4 @@
-.openstack.env
 .DS_Store
 
+.openstack.env
+.openstack.*.env
