@@ -54,13 +54,7 @@
     - apt-transport-https
     - ca-certificates
     - nfs-common
-  become: yes
-  become_user: root
-  become_method: sudo
-  ignore_errors: True
-
-- name: uninstall pyopenssl after apt https install
-  shell: pip uninstall -y pyopenssl
+    - mosh
   become: yes
   become_user: root
   become_method: sudo
@@ -72,3 +66,19 @@
   become_user: root
   become_method: sudo
   ignore_errors: True
+
+- name: copy tmux config file to home directory
+  template: src=files/tmux.conf dest=~{{ agave_linux_user_name }}/.tmux.conf
+  become: yes
+  become_user: root
+  become_method: sudo
+  ignore_errors: True
+  tags:
+    - tmux_conf
+
+- name: tmux - Ensure permissions on ~/.tmux.conf
+  file: >
+    path=~{{ agave_linux_user_name }}/.tmux.conf
+    owner={{ agave_linux_user_name }}
+    group={{ agave_linux_user_name }}
+    mode=0740

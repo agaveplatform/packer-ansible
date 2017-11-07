@@ -1,10 +1,4 @@
 {
-  "variables": {
-    "openstack_image_id": "3e2cfdd5-f726-4535-b035-26f72917aa96",
-    "openstack_flavor_id": "2",
-    "openstack_network_id": "c30ca0dd-a1b7-4736-b5c1-68741196b03a",
-    "docker_version": "17.09-ce"
-  },
   "builders": [
     {
       "type": "openstack",
@@ -13,9 +7,9 @@
       "source_image": "{{user `openstack_image_id`}}",
       "flavor": "{{user `openstack_flavor_id`}}",
       "use_floating_ip": true,
-      "floating_ip_pool": "public",
+      "floating_ip_pool": "{{user `openstack_floating_ip_pool`}}",
       "security_groups": [
-        "packer"
+        "{{user `openstack_security_group`}}"
       ],
       "networks": [
         "{{user `openstack_network_id`}}"
@@ -57,9 +51,6 @@
     {
       "type": "shell",
       "inline": [
-        "sleep 90",
-        "echo $(ps aux | grep 'apt-get' | grep -v 'grep apt-get' | awk '{print $2}') || true",
-        "while [ -n \"$(ps aux | grep 'apt-get' | grep -v 'grep apt-get' | awk '{print $2}')\" ]; do date; echo $(ps aux | grep 'apt-get' | grep -v 'grep apt-get'); sleep 10; done",
         "sudo apt-get install -y python-pip",
         "sudo pip install --upgrade pip",
         "sudo pip install ansible==2.4.0"
@@ -71,6 +62,15 @@
       "playbook_dir": "/data/ansible",
       "galaxy_file": "/data/ansible/requirements.yml",
       "only": ["openstack"]
+    },
+    {
+      "type": "shell",
+      "inline": [
+        "sudo service docker start",
+        "sudo docker pull agaveplatform/sc17-sandbox:latest",
+        "sudo docker pull agaveplatform/jupyter-notebook:latest",
+        "sudo docker pull traefik:latest"
+      ]
     }
   ],
   "post-processors": [

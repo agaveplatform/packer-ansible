@@ -27,7 +27,7 @@ Once you have a network configured, you can run the `packer.json` template.
 ```  
 docker run --env-file=$(pwd)/.openstack.env \
      --rm -it -v $(pwd):/data  \
-     hashicorp/packer:full build /data/packer.json
+     hashicorp/packer:full build -var-file=/data/openstack/iu-jetstream/variables.json /data/openstack/iu-jetstream/packer.json
 
 ```
 
@@ -44,11 +44,11 @@ The resulting image ID can then be used by the `agaveplatform/terraform-provisio
 
 ## Customizing the build
 
-If you are running somewhere other than the IU Jetstream cloud, you will need to change the id of the OpenStack image Packer will provision to build your final image. You can change this by adding the `-e openstack_image_id=<uuid>` parameter to the build command.
+If you are running somewhere other than the IU Jetstream cloud, you will need to change the id of the OpenStack image Packer will provision to build your final image. You can change this by creating a `variables.json` file and overriding any variables you need to in there. See the different openstack target environments under the `openstack` folder for examples on several national cloud systems.
 
 ```  
 docker run --env-file=$(pwd)/.openstack.env \
      --rm -it -v $(pwd):/data  \
-     hashicorp/packer:full build -e openstack_image_id=<uuid> /data/packer.json
+     hashicorp/packer:full build -var-file=/data/openstack/iu-jetstream/variables.json /data/openstack/iu-jetstream/packer.json
 
 ```
