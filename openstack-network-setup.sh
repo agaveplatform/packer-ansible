@@ -9,10 +9,10 @@
 #
 
 # copy your openstack environment into a file we'll source later
-env | grep "OS_" >> .openstack.env
+#env | grep "OS_" >> .openstack.env
 
-alias openstack='docker run -v $(pwd)/.openstack.env:/root/.openstack/openrc.sh:ro -it --rm -e OPENRC_LOCATION:/root/.openstack/openrc.sh tacc/openstack-cli:liberty openstack'
-```
+#alias openstack='docker run -v $(pwd)/.openstack.env:/root/.openstack/openrc.sh:ro -it --rm -e OPENRC_LOCATION:/root/.openstack/openrc.sh tacc/openstack-cli:liberty openstack'
+
 # Create a private network
 openstack network create ${OS_USERNAME}-api-net
 

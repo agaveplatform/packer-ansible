@@ -6,7 +6,7 @@
       "image_name": "agave_ubuntu1604_docker{{user `docker_version`}}",
       "source_image": "{{user `openstack_image_id`}}",
       "flavor": "{{user `openstack_flavor_id`}}",
-      "use_floating_ip": false,
+      "use_floating_ip": true,
       "floating_ip_pool": "{{user `openstack_floating_ip_pool`}}",
       "security_groups": [
         "{{user `openstack_security_group`}}"

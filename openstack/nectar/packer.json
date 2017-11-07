@@ -15,7 +15,7 @@
         "{{user `openstack_network_id`}}"
       ],
       "metadata": {
-        "org_agaveplatform_datacenter": "iu-jetstream",
+        "org_agaveplatform_datacenter": "nectar",
         "org_agaveplatform_environment": "training",
         "org_agaveplatform_runtime": "docker",
         "org_agaveplatform_builder_type": "packer",
@@ -51,9 +51,14 @@
     {
       "type": "shell",
       "inline": [
+        "sleep 90",
+        "echo $(ps aux | grep 'apt-get' | grep -v 'grep apt-get' | awk '{print $2}') || true",
+        "while [ -n \"$(ps aux | grep 'apt-get' | grep -v 'grep apt-get' | awk '{print $2}')\" ]; do date; echo $(ps aux | grep 'apt-get' | grep -v 'grep apt-get'); sleep 10; done",
         "sudo apt-get install -y python-pip",
         "sudo pip install --upgrade pip",
-        "sudo pip install ansible==2.4.0"
+        "sudo pip install ansible==2.4.0",
+        "sudo pip install -U cryptography",
+        "sudo pip install -U pyopenssl"
       ]
     },
     {

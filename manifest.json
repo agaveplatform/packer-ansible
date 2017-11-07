@@ -23,7 +23,31 @@
       "files": null,
       "artifact_id": "c7e73095-8211-4a62-a714-f1cfaaf52695",
       "packer_run_uuid": "6fae2d9b-ba2c-4b2b-f686-8f4eee319bdd"
+    },
+    {
+      "name": "openstack",
+      "builder_type": "openstack",
+      "build_time": 1508492280,
+      "files": null,
+      "artifact_id": "d4b70668-99c3-4fbb-8721-f35716fee386",
+      "packer_run_uuid": "a8f36053-1a0e-e4dc-e805-a23876881bb6"
+    },
+    {
+      "name": "openstack",
+      "builder_type": "openstack",
+      "build_time": 1509337050,
+      "files": null,
+      "artifact_id": "8a322d7e-d4f9-468f-a027-41a649b74507",
+      "packer_run_uuid": "9525ba10-7b3b-53c2-6f1b-dcd468afc682"
+    },
+    {
+      "name": "openstack",
+      "builder_type": "openstack",
+      "build_time": 1509344916,
+      "files": null,
+      "artifact_id": "6d9d1939-46ab-4dd0-b0d6-7ab43022ad55",
+      "packer_run_uuid": "49a9ae93-0d11-f674-b76b-12bc88d97290"
     }
   ],
-  "last_run_uuid": "6fae2d9b-ba2c-4b2b-f686-8f4eee319bdd"
+  "last_run_uuid": "49a9ae93-0d11-f674-b76b-12bc88d97290"
 }

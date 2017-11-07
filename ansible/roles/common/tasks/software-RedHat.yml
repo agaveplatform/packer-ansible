@@ -33,6 +33,7 @@
     - iftop
     - ntpd
     - nfs-utils
+    - mosh
   become: yes
   become_user: root
   become_method: sudo
