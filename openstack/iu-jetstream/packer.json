@@ -54,6 +54,19 @@
       ]
     },
     {
+      "type": "shell",
+      "inline": [
+        "sudo pip install --upgrade pip",
+        "sudo pip install ansible==2.4.0  || true"
+      ]
+    },
+    {
+      "type": "shell",
+      "inline": [
+        "sudo pip install -U cryptography pyopenssl || true"
+      ]
+    },
+    {
       "type": "ansible-local",
       "playbook_file": "/data/ansible/playbook.yml",
       "playbook_dir": "/data/ansible",

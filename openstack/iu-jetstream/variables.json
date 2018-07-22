@@ -1,7 +1,7 @@
 {
   "openstack_image_id": "571557d8-7e02-4095-a0d2-0b01a5aedd76",
   "openstack_flavor_id": "2",
-  "openstack_network_id": "52783b81-35ae-4de7-84f9-860c4b054495",
+  "openstack_network_id": "047c27de-f846-41b2-9037-6bbb78d602e5",
   "openstack_security_group": "packer",
   "openstack_floating_ip_pool": "public",
   "docker_version": "18.03-ce"

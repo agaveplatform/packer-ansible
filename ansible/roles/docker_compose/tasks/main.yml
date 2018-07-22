@@ -6,7 +6,12 @@
 ---
 
 - name: Clean up docker build
-  shell: "pip uninstall -y docker-py"
+  pip:
+    state: absent
+    name: "{{item}}"
+  loop:
+    - docker-py
+    - docker-compose
   become: yes
   become_user: root
   become_method: sudo
@@ -16,19 +21,14 @@
     - docker
     - compose
 
-- name: Clean up docker build
-  shell: "pip uninstall -y docker"
-  become: yes
-  become_user: root
-  become_method: sudo
-  when: not skip_docker_compose
-  ignore_errors: True
-  tags:
-    - docker
-    - compose
 
 - name: Install docker-compose
-  shell: "pip install docker-compose"
+  pip:
+    state: present
+    name: "{{item}}"
+  loop:
+    - docker-py
+    - docker-compose
   become: yes
   become_user: root
   become_method: sudo
