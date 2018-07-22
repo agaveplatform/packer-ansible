@@ -1,11 +1,11 @@
-# Agave VM Creator  
+# Agave VM Image Creator  
 
 ## Overview  
-This repository contains a [Packer](https://packer.io) template and [Ansible](https://ansible.io) playbook to build the default base VM image used by the Agave Platform to host its docker services. By default, the playbook will build an Ubuntu 16.4 image and publish it to the Indiana University Jetstream (OpenStack) cluster.
+This repository contains a [Packer](https://packer.io) template and [Ansible](https://ansible.io) playbook to build the default base VM image used by the Agave Platform to host its docker services. By default, the playbook will build an Ubuntu 16.04 image and publish it to the Indiana University Jetstream (OpenStack) cluster.
 
 ## Requirements
 
-The only pre-requisite to run the VM creator is that Docker must be installed on the system where the Packer template is run.
+The only pre-requisite to run the vm image creator is that Docker must be installed on the system where the Packer template is run.
 
 ## Running
 
@@ -40,7 +40,7 @@ A successful run will result in the following text being printed at the end of t
 --> openstack:
 ```  
 
-The resulting image ID can then be used by the `agaveplatform/terraform-provisioner` project to instantiate or reconfigure your Agave infrastucture.  
+The resulting image ID can then be used by the [agaveplatform/terraform-provisioner](https://github.com/agaveplatform/terraform-provisioner) project to instantiate or reconfigure your Agave training infrastucture.  
 
 ## Customizing the build
 
