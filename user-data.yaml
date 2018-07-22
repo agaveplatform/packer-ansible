@@ -1,4 +1,18 @@
 #cloud-config
+
+#packages: []
+#apt_update: false
+package_upgrade: false
+package_update: false
+package_reboot_if_required: false
+final_message: "Boot completed in $UPTIME seconds"
+runcmd:
+  - [sudo, apt-get, install, -y, python-pip]
+  - [sudo, pip, install, --upgrade, pip]
+  - [sudo, pip, install, ansible>=2.5.0,<2.5.99"]
+  - [sudo, pip, install, -U, cryptography, pyopenssl]
+
+
 groups:
   - agave
   - docker
@@ -12,5 +26,3 @@ users:
     ssh-authorized-keys:
       - ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQDCc8dGiSjSOnkvZO+TZjffEXo9xcexgmxmYWRXdYUP1r92rjZ/YC80jmob76N59UuVcL8mWKWo2Miku6CmG0AhFof9Bxl5p0i9t7wUHUE96PnCRmX7P/2m4TpKaUmW6tbvCiKnXkKztCaS1iKvcNzVcsVIIedR8kDosFDap6zSXgm9/EKQ5ETAXo+Ws7Oss8aifLAkW3hHXSPgBwgAbwUmx83aoZYdaC+hjGg7fTF19Vrtb1y/jyVkrIP6JIIYY9wEr9LzPuSo20sACKYyEEsjaw2WO3kBNMTfdKV7nNyE/uQGgCblRt/G82Op5mcvxgd0lFaUSkQ30j7xAMn2k1iNRLJSpQwHZKh+vZ5egb5DBZTAAdaDVc26kBCqR04WHzpePqukvV2lejMNxdtfnmOIdudo12gEzEozyMHeKQMmzqi3vV8fQ9Z1LSs6tStxx9LfrS84fVsPQ8gTusovwUhYQ33o1sPF6F17elhFRnHoX+i0VTt5mgbcxG3gbkMCc4ICbK13aC73SM8bMdDYRaE5tCfwJ4YpTchL8EA9NvmRUHnhru19dZGQA2yFzkx3ohqUs65ei7A4SLxJto8DuUnxIkPK7bwKkrSg4UxtDTJv68AbVOMh9MyISF1y4eu91xwVHtEMn02gd9zNnQoIaoe4A1QdNtHh+nsC98XaK9JXLw== agaveplatform@gmail.com
       - ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQDMA7RUm5PJaVUArjx25c5zAFlMJdFK814zVxyFkGBEtbxebCnheaJ2uSir4uGD3BS/JTFAzhpEL0uTYnN2UAlESCADMUTRF0ep/4Bi4tpyWF6hWy6qH72wSJmguv9EsVFQeMP19gb3MTOClHGYv6gmqeYbf3C0jdDa2pRr8SV0hXOeOTpBIQIYQYjt0BniJjoyGWw3dvsZjM+4JoaOWM/rmnwJ1guU2Lc9iTEz0nyPtr4DBeE/EUFN73KL2EheTtBGaPLzp+/yzGTcmHmjxPR7RQakQEvNkwnmB34s4yzqfZw9qV0BYH5aBT1Y4e4l4ZSbTor0W3wznC9WWUrpZ6sshPzgMOUvP5ZlnDkCb/txBmkVrAQ9Cal2d1A2VmvHmP7ciddHeQ0os0uL/pu5ZagaBftgqZXzNrUAmMxktKa3WCOb6+6t0KCZwWB1u2+xTcUAyexWvBN5ybmtMg4YFABMjzaQ8MtiHEG0UueAM6QXS7sBPR8XqHVL8BhZ/ft3hYX1CEN/pJAw/ySwoV8bvHY3scrl/wsrzEPNCBJbGLYVzP27NS7hzaPvUiyNXbPtcSiZ79icNNGI0ap9d2vyFOaT4Yf8dS7NIEG0ItcsF+0e/OXY+gGkvuaClENRLKGdrWpukx/EIOv8j6TKULP1rCrDZiz3/QkXh6Ic5ufPrccgfw== dooley@dooley-mac.local
-
-package_update: false

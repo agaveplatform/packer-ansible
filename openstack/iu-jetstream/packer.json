@@ -36,7 +36,6 @@
         "org_agaveplatform_system_software_node": null,
         "org_agaveplatform_system_software_ruby": null,
         "org_agaveplatform_system_software_perl": "5.22.1",
-        "org_agaveplatform_system_software_ruby": null,
         "org_agaveplatform_system_software_golang": null,
 
         "org_agaveplatform_system_software_docker": "{{user `docker_version`}}",
@@ -51,9 +50,7 @@
     {
       "type": "shell",
       "inline": [
-        "sudo apt-get install -y python-pip",
-        "sudo pip install --upgrade pip",
-        "sudo pip install ansible==2.4.0"
+        "while [ ! -f /var/lib/cloud/instance/boot-finished ]; do echo 'Waiting for cloud-init...'; sleep 1; done"
       ]
     },
     {
@@ -67,8 +64,11 @@
       "type": "shell",
       "inline": [
         "sudo service docker start",
-        "sudo docker pull agaveplatform/sc17-sandbox:latest",
+        "sudo docker pull agaveplatform/training-sandbox:latest",
         "sudo docker pull agaveplatform/jupyter-notebook:latest",
+        "sudo docker pull agaveplatform/rstudio:3.4.3-shiny",
+        "sudo docker pull agaveplatform/opencpu:latest",
+        "sudo docker pull agaveplatform/jenkins:sc18",
         "sudo docker pull traefik:latest"
       ]
     }

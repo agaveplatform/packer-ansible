@@ -3,6 +3,7 @@
     {
       "type": "openstack",
       "ssh_username": "ubuntu",
+      "ssh_wait_timeout": "10000s",
       "image_name": "agave_ubuntu1604_docker{{user `docker_version`}}",
       "source_image": "{{user `openstack_image_id`}}",
       "flavor": "{{user `openstack_flavor_id`}}",
@@ -56,7 +57,7 @@
         "while [ -n \"$(ps aux | grep 'apt-get' | grep -v 'grep apt-get' | awk '{print $2}')\" ]; do date; echo $(ps aux | grep 'apt-get' | grep -v 'grep apt-get'); sleep 10; done",
         "sudo apt-get install -y python-pip",
         "sudo pip install --upgrade pip",
-        "sudo pip install ansible==2.4.0",
+        "sudo pip install ansible>=2.5.0,<2.5.99 || true"
         "sudo pip install -U cryptography",
         "sudo pip install -U pyopenssl"
       ]
@@ -72,8 +73,11 @@
       "type": "shell",
       "inline": [
         "sudo service docker start",
-        "sudo docker pull agaveplatform/sc17-sandbox:latest",
+        "sudo docker pull agaveplatform/training-sandbox:latest",
         "sudo docker pull agaveplatform/jupyter-notebook:latest",
+        "sudo docker pull agaveplatform/rstudio:3.4.3-shiny",
+        "sudo docker pull agaveplatform/opencpu:latest",
+        "sudo docker pull agaveplatform/jenkins:sc18",
         "sudo docker pull traefik:latest"
       ]
     }
