@@ -8,18 +8,18 @@
 # - version control systems
 # - a few other misc utilities that one can reasonably expect
 #
-
-- name: Clean up broken dpkg locks
-  file:
-    path: "{{item}}"
-    state: absent
-  with_items:
-    - /var/lib/dpkg/lock
-    - /var/cache/apt/archives/lock
-    - /var/lib/apt/lists/lock
-  become: yes
-  become_user: root
-  become_method: sudo
+#
+# - name: Clean up broken dpkg locks
+#   file:
+#     path: "{{item}}"
+#     state: absent
+#   with_items:
+#     - /var/lib/dpkg/lock
+#     - /var/cache/apt/archives/lock
+#     - /var/lib/apt/lists/lock
+#   become: yes
+#   become_user: root
+#   become_method: sudo
 
 - name: Clean up broken dpkg locks
   shell: "dpkg --configure -a"
