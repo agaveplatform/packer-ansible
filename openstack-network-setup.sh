@@ -9,9 +9,9 @@
 #
 
 # copy your openstack environment into a file we'll source later
-if [[ ! -f .openstack.env ]]; then
-  env | grep "OS_" >> .openstack.env
-fi
+#if [[ ! -f .openstack.env ]]; then
+#  env | grep "OS_" >> .openstack.env
+#fi
 
 # Create a private network
 openstack network create ${OS_USERNAME}-api-net
