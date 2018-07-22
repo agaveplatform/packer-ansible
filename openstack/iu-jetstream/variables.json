@@ -1,5 +1,5 @@
 {
-  "openstack_image_id": "70998b22-956f-471a-9b22-d8739eb25842",
+  "openstack_image_id": "571557d8-7e02-4095-a0d2-0b01a5aedd76",
   "openstack_flavor_id": "2",
   "openstack_network_id": "52783b81-35ae-4de7-84f9-860c4b054495",
   "openstack_security_group": "packer",
