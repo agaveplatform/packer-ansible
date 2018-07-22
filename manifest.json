@@ -71,7 +71,15 @@
       "files": null,
       "artifact_id": "bf034de6-f837-4d96-a13c-86f499791adc",
       "packer_run_uuid": "56bab41b-391e-8973-6986-dcdd065c0866"
+    },
+    {
+      "name": "openstack",
+      "builder_type": "openstack",
+      "build_time": 1532268102,
+      "files": null,
+      "artifact_id": "622f5a63-5293-4898-8b8a-8a0aa3c2e06d",
+      "packer_run_uuid": "cefc31cc-8c1a-e7f3-e96d-21fe2dd69f97"
     }
   ],
-  "last_run_uuid": "56bab41b-391e-8973-6986-dcdd065c0866"
+  "last_run_uuid": "cefc31cc-8c1a-e7f3-e96d-21fe2dd69f97"
 }
