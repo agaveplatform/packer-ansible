@@ -74,9 +74,7 @@
       "inline": [
         "sudo service docker start",
         "sudo docker pull agaveplatform/training-sandbox:latest",
-        "sudo docker pull agaveplatform/jupyter-notebook:latest",
-        "sudo docker pull agaveplatform/rstudio:3.4.3-shiny",
-        "sudo docker pull agaveplatform/opencpu:latest",
+        "sudo docker pull agaveplatform/jupyter-notebook:5.2",
         "sudo docker pull agaveplatform/jenkins:sc18",
         "sudo docker pull traefik:latest"
       ]
