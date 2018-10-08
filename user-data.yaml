@@ -2,9 +2,13 @@
 
 #packages: []
 #apt_update: false
-package_upgrade: false
-package_update: false
-package_reboot_if_required: false
+#package_upgrade: false
+#package_update: false
+#package_reboot_if_required: false
+apt_update: false
+apt_upgrade: false
+apt_reboot_if_required: false
+
 final_message: "Boot completed in $UPTIME seconds"
 runcmd:
   - [sudo, apt-get, install, -y, python-pip]
