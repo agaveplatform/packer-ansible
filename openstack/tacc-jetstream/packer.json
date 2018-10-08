@@ -61,7 +61,7 @@
       "type": "ansible-local",
       "playbook_file": "/data/ansible/playbook.yml",
       "playbook_dir": "/data/ansible",
-      "galaxy_file": "/data/ansible/requirements.yml",
+      "galaxy_file": "/data/ansible/galaxy.yml",
       "only": ["openstack"]
     },
     {
