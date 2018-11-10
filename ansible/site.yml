@@ -1,0 +1,8 @@
+---
+# default playbook to peform host config.
+# @see playbooks/host-playbooks/main.plbk
+
+- name: Applying baseline configuration to host
+  import_playbook: playbooks/host-playbooks/main.plbk
+  vars:
+    devops_linux_user: agaveops

@@ -1,0 +1,11 @@
+paramiko
+PyYAML
+Jinja2
+httplib2
+six
+pycrypto
+pytz
+cryptography
+ansible>=2.7
+shade
+docker

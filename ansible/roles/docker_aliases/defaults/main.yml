@@ -1,5 +1,0 @@
-# file: docker_aliases/defaults/main.yml
----
-skip_docker_aliases: false
-skip_docker_completion: false
-skip_docker_compose_completion: false

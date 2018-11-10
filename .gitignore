@@ -2,3 +2,4 @@
 
 .openstack.env
 .openstack.*.env
+/openstack.env

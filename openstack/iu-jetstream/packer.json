@@ -43,7 +43,7 @@
         "org_agaveplatform_system_software_docker_plugins_network": "bridge,host,macvlan,null,overlay",
         "org_agaveplatform_system_software_docker_plugins_log": "awslogs,fluentd,gcplogs,gelf,journald,json-file,logentries,splunk,syslog"
       },
-      "user_data_file": "/data/user-data.yaml"
+      "user_data_file": "{{template_dir}}/../../user-data.yaml"
     }
   ],
   "provisioners": [
@@ -57,26 +57,27 @@
       "type": "shell",
       "inline": [
         "sudo pip install --upgrade pip",
-        "sudo pip install ansible>=2.5  || true"
-      ]
-    },
-    {
-      "type": "shell",
-      "inline": [
-        "sudo pip install -U cryptography pyopenssl || true"
+        "sudo pip3 install paramiko PyYAML Jinja2 httplib2 six pycrypto pytz cryptography 'ansible>=2.7' shade docker || true"
       ]
     },
     {
       "type": "ansible-local",
-      "playbook_file": "/data/ansible/playbook.yml",
-      "playbook_dir": "/data/ansible",
-      "galaxy_file": "/data/ansible/galaxy.yml",
-      "only": ["openstack"]
+      "staging_directory": "/tmp/agave-packer-ansible",
+      "inventory_groups": [
+        "docker",
+        "local"
+      ],
+      "command": "ANSIBLE_FORCE_COLOR=1 PYTHONUNBUFFERED=1 ANSIBLE_CONFIG=/tmp/agave-packer-ansible/ansible.cfg ansible-playbook",
+      "playbook_file": "{{template_dir}}/../../ansible/site.yml",
+      "playbook_dir": "{{template_dir}}/../../ansible",
+      "extra_arguments": [
+        "-e ansible_python_interpreter=/usr/bin/python3",
+        "-e devops_linux_user=agaveops"
+      ]
     },
     {
       "type": "shell",
       "inline": [
-        "sudo service docker start",
         "sudo docker pull agaveplatform/training-sandbox:latest",
         "sudo docker pull agaveplatform/jupyter-notebook:5.2",
         "sudo docker pull agaveplatform/jenkins:sc18",
@@ -87,7 +88,7 @@
   "post-processors": [
     {
       "type": "manifest",
-      "output": "/data/manifest.json",
+      "output": "{{template_dir}}/../../manifest.json",
       "strip_path": true
     }
   ]

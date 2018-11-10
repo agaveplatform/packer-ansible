@@ -1,0 +1,36 @@
+VAGRANTFILE_API_VERSION = "2"
+
+Vagrant.configure("2") do |config|
+  config.vm.define "packer" do |machine|
+    machine.vm.box = "bento/ubuntu-16.04"
+    machine.ssh.insert_key = false
+
+    machine.vm.provider :virtualbox do |v|
+      v.name = "packer"
+      v.memory = 2048
+      v.cpus = 2
+      #--natdnshostresolver1 is needed for private network to work with DNS
+      v.customize ["modifyvm", :id, "--natdnshostresolver1", "on"]
+      #--ioapic is needed for multi core support
+      v.customize ["modifyvm", :id, "--ioapic", "on"]
+      # handle automatic clock skew fix when box is resumed after long sleeps.
+      # without this ntpd will not catch up on its own and you have to run
+      # sudo ntpdate ntp.ubuntu.com to resync clocks
+      #v.customize [ "guestproperty", "set", :id, "/VirtualBox/GuestAdd/VBoxService/--timesync-set-threshold", 10000 ]
+    end
+
+    machine.vm.hostname = "packer"
+    machine.vm.network :private_network, ip: "192.168.33.30"
+
+    # Ansible provisioner.
+    machine.vm.provision "ansible" do |ansible|
+      ansible.playbook = "site.yml"
+      ansible.raw_arguments  = [
+        "--connection=paramiko",
+        "-e ansible_python_interpreter=/usr/bin/python3",
+        "-e devops_linux_user=agaveops"
+      ]
+
+    end
+  end
+end
